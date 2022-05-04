@@ -9,6 +9,6 @@ RUN apt-get update && apt-get install -y \
 
 USER tfc-agent
 
-ENV ASDF_VERSION=v0.9.0
+ENV ASDF_VERSION=v0.10.0
 COPY asdf-install.sh .
 RUN ./asdf-install.sh
