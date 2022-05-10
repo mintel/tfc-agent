@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
 USER tfc-agent
 
 ENV HOME="/home/tfc-agent"
-ENV PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
+ENV ASDF_DIR="$HOME/.asdf"
+ENV PATH="$ASDF_DIR/shims:$ASDF_DIR/bin:$PATH"
 COPY asdf-install.sh .
 RUN ./asdf-install.sh
 
