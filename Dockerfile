@@ -15,3 +15,6 @@ ENV HOME="/home/tfc-agent"
 ENV PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
 COPY asdf-install.sh .
 RUN ./asdf-install.sh
+
+COPY docker-entrypoint.sh .
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
