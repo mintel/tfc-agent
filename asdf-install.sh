@@ -3,6 +3,10 @@
 # shellcheck disable=SC2016
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$ASDF_VERSION"
+echo '. $HOME/.asdf/asdf.sh' >> .bashrc
+echo '. $HOME/.asdf/completions/asdf.bash' >> .bashrc
+export PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
+
 curl https://raw.githubusercontent.com/mintel/build-harness-extensions/main/modules/satoshi/tf-tool-versions | grep -vP '(^terraform\s|\sterraform$)' > "$HOME/.tool-versions"
 mapfile -t plugin_cmds < <(grep -o "plugin add.*" "$HOME/.tool-versions")
 
