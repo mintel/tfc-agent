@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
   curl \
   git \
   unzip \
+  zip \
   && rm -rf /var/lib/apt/lists/*
 
 COPY install-binaries.sh .
