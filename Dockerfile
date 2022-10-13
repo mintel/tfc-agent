@@ -2,9 +2,16 @@ FROM hashicorp/tfc-agent:1.2.0
 
 USER root
 
-RUN apt-get update && apt-get install -y \
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y \
   curl \
+  default-jre \
   git \
+  openssl \
+  pwgen \
   unzip \
   zip \
   && rm -rf /var/lib/apt/lists/*
