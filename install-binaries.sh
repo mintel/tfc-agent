@@ -7,44 +7,16 @@
 
 set -ex
 
-function install_awscli() {
-  local version; version=$1
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${version}.zip" -o "awscliv2.zip"
-  unzip awscliv2.zip
-  ./aws/install
-  rm awscliv2.zip
-}
+# Install asdf
+git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf
 
-function install_terraform-docs() {
-  local version; version=$1
-  curl -Lo ./terraform-docs.tar.gz "https://github.com/terraform-docs/terraform-docs/releases/download/v${version}/terraform-docs-v${version}-$(uname)-amd64.tar.gz"
-  tar -xzf terraform-docs.tar.gz
-  chmod +x terraform-docs
-  mv terraform-docs /usr/local/terraform-docs
-  rm terraform-docs.tar.gz
-}
+# Install tools via asdf
+grep -vP '(^terraform\s|\sterraform$)' tf-tool-versions > $HOME/.tool-versions
+grep -E "^#asdf:" $HOME/.tool-versions | cut -d':' -f2- | tr '\n' '\0' | xargs -0 -n1 -Icmd -- sh -c '$HOME/.asdf/bin/asdf cmd'
+$HOME/.asdf/bin/asdf install
 
-function install_tflint() {
-  local version; version=$1
-  curl -s "https://raw.githubusercontent.com/terraform-linters/tflint/v${version}/install_linux.sh" | bash
-}
-
-function install_tfsec {
-  local version; version=$1
-  curl -Lo ./tfsec "https://github.com/aquasecurity/tfsec/releases/download/v${version}/tfsec-linux-amd64"
-  chmod +x tfsec
-  mv tfsec /usr/local/tfsec
-}
-
-cat tf-tool-versions | grep -vP '(^terraform\s|\sterraform$)' | grep '^[A-Za-z]' > "$HOME/.tool-versions"
-while read -r line; do
-  app=$(echo "$line" | cut -d' ' -f1)
-  version=$(echo "$line" | cut -d' ' -f2)
-  func="install_${app}"
-  if declare -f "$func"; then
-    "$func" "$version"
-  else
-    echo "ERROR: Function not available to install $app"
-    exit 1
-  fi
-done < "$HOME/.tool-versions"
+# Create symlinks so the TFCloud agent still works
+ln -sf $HOME/.asdf/shims/aws /usr/local/bin/aws
+ln -sf $HOME/.asdf/shims/terraform-docs /usr/local/bin/terraform-docs
+ln -sf $HOME/.asdf/shims/tflint /usr/local/bin/tflint
+ln -sf $HOME/.asdf/shims/tfsec /usr/local/bin/tfsec
