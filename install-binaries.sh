@@ -36,7 +36,7 @@ function install_tfsec {
   mv tfsec /usr/local/tfsec
 }
 
-curl -s https://raw.githubusercontent.com/mintel/build-harness-extensions/main/modules/satoshi/tf-tool-versions | grep -vP '(^terraform\s|\sterraform$)' | grep '^[A-Za-z]' > "$HOME/.tool-versions"
+cat tf-tool-versions | grep -vP '(^terraform\s|\sterraform$)' | grep '^[A-Za-z]' > "$HOME/.tool-versions"
 while read -r line; do
   app=$(echo "$line" | cut -d' ' -f1)
   version=$(echo "$line" | cut -d' ' -f2)
