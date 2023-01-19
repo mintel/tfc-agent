@@ -17,7 +17,8 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 USER tfc-agent
-ENV PATH="/home/tfc-agent/.asdf/shims:$PATH"
+ENV PATH="/home/tfc-agent/.asdf/shims:$PATH" \
+    ASDF_DATA_DIR="/home/tfc-agent/.asdf"
 
 ADD --chown=tfc-agent https://raw.githubusercontent.com/mintel/build-harness-extensions/main/modules/satoshi/tf-tool-versions .
 COPY install-binaries.sh .
