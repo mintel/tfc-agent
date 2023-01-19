@@ -16,7 +16,7 @@ grep -E "^#asdf:" $HOME/.tool-versions | cut -d':' -f2- | tr '\n' '\0' | xargs -
 $HOME/.asdf/bin/asdf install
 
 # Create symlinks so the TFCloud agent still works
-ln -sf $HOME/.asdf/shims/aws /usr/local/bin/aws
-ln -sf $HOME/.asdf/shims/terraform-docs /usr/local/bin/terraform-docs
-ln -sf $HOME/.asdf/shims/tflint /usr/local/bin/tflint
-ln -sf $HOME/.asdf/shims/tfsec /usr/local/bin/tfsec
+ln -sf $HOME/.asdf/shims/aws /usr/local/aws
+ln -sf $HOME/.asdf/shims/terraform-docs /usr/local/terraform-docs
+ln -sf $HOME/.asdf/shims/tflint /usr/local/tflint
+ln -sf $HOME/.asdf/shims/tfsec /usr/local/tfsec
