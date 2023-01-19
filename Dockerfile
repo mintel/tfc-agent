@@ -22,3 +22,4 @@ ADD --chown=tfc-agent https://raw.githubusercontent.com/mintel/build-harness-ext
 COPY install-binaries.sh .
 RUN ./install-binaries.sh
 
+ENV PATH "/home/tfc-agent/.asdf/shims:$PATH"

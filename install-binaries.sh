@@ -10,6 +10,3 @@ git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf
 grep -vP '(^terraform\s|\sterraform$)' tf-tool-versions > $HOME/.tool-versions
 grep -E "^#asdf:" $HOME/.tool-versions | cut -d':' -f2- | tr '\n' '\0' | xargs -0 -n1 -Icmd -- sh -c '$HOME/.asdf/bin/asdf cmd'
 $HOME/.asdf/bin/asdf install
-
-# Ensure asdf-installed binaries are in the path
-echo "export PATH=\"$HOME/.asdf/shims:$PATH\"" >> $HOME/.bashrc
