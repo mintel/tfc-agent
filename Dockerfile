@@ -16,8 +16,9 @@ RUN apt-get update && \
   zip \
   && rm -rf /var/lib/apt/lists/*
 
-ADD https://raw.githubusercontent.com/mintel/build-harness-extensions/main/modules/satoshi/tf-tool-versions .
+USER tfc-agent
+
+ADD --chown=tfc-agent https://raw.githubusercontent.com/mintel/build-harness-extensions/main/modules/satoshi/tf-tool-versions .
 COPY install-binaries.sh .
 RUN ./install-binaries.sh
 
-USER tfc-agent

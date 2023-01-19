@@ -1,9 +1,5 @@
 #!/usr/bin/bash
-# Unfortunately due to the way that the agent works we are unable to use asdf so functions to install all additional 
-# binaries required by the Terraform Cloud agent should be added here in the format "install_${APP_NAME}". App names and
-# versions are pulled from the common .terraform-tools file at
-# https://github.com/mintel/build-harness-extensions/blob/main/modules/satoshi/tf-tool-versions. If a function hasn't
-# been written for an app in that file then the build will fail.
+# Tool versions are pulled at build time from https://github.com/mintel/build-harness-extensions/blob/main/modules/satoshi/tf-tool-versions
 
 set -ex
 
@@ -15,8 +11,5 @@ grep -vP '(^terraform\s|\sterraform$)' tf-tool-versions > $HOME/.tool-versions
 grep -E "^#asdf:" $HOME/.tool-versions | cut -d':' -f2- | tr '\n' '\0' | xargs -0 -n1 -Icmd -- sh -c '$HOME/.asdf/bin/asdf cmd'
 $HOME/.asdf/bin/asdf install
 
-# Create symlinks so the TFCloud agent still works
-ln -sf $HOME/.asdf/shims/aws /usr/local/aws
-ln -sf $HOME/.asdf/shims/terraform-docs /usr/local/terraform-docs
-ln -sf $HOME/.asdf/shims/tflint /usr/local/tflint
-ln -sf $HOME/.asdf/shims/tfsec /usr/local/tfsec
+# Ensure asdf-installed binaries are in the path
+echo "export PATH=\"$HOME/.asdf/shims:$PATH\"" >> $HOME/.bashrc
