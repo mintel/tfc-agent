@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.2.0_mintel.0.3.0] - 2023-01-20
+### Changed
+- Use asdf to install tools rather than individual bash functions
+
 ## [1.2.0_mintel.0.2.0] - 2023-01-17
 ### Added
 - Add changelog
