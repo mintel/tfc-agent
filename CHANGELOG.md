@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.20-mintel.1.0.0] - 2025-03-11
+### Added
+- Through .tool-versions update:
+  - gomplate 3.11.8
+  - hcl2json 0.6.3
+  - opentofu 1.7.1
+
+### Changed
+- Update tfc-agent to v1.20
+- Update asdf to v0.15.0
+- Update to latest .tool-versions
+  - awscli 2.11.8 -> 2.15.38
+  - terraform-docs 0.16.0 -> 0.17.0
+  - tflint 0.34.1 -> 0.50.3
+  - tfsec 1.15.4 -> 1.28.5
+
 ## [1.2.0_mintel.0.4.0] - 2023-09-12
 ### Changed
 - (No-op) build with latest tool versions:
