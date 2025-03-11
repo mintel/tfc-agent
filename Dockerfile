@@ -31,5 +31,5 @@ WORKDIR /home/tfc-agent
 # Set environment variables required for asdf-installed tools to function when used by the tfc-agent:
 #   - PATH is required since the asdf bash plugin isn't installed, so we need to set where to find asdf's shims for the installed binaries
 #   - ASDF_DATA_DIR is required since the agent overrides the HOME var to ensure a clean environment each run, which confuses asdf's shims
-ENV PATH="/home/tfc-agent/.asdf/shims:$PATH" \
+ENV PATH="/home/tfc-agent/.asdf/shims:/home/tfc-agent/.asdf/bin:$PATH" \
   ASDF_DATA_DIR="/home/tfc-agent/.asdf"
